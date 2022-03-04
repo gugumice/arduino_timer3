@@ -33,9 +33,9 @@ void ledsOff(){
   };
 
 void setup() {
-	b_gates.begin();
-	while (!Serial) { }; // Enable serial
-	Serial.begin(9600);
+  b_gates.begin();
+  while (!Serial) { }; // Enable serial
+  Serial.begin(9600);
   ledsOn();
   delay(100);
   ledsOff();
@@ -63,32 +63,33 @@ void track(byte track_num, unsigned long t){
   };
 
 void loop() {
-	if (b_gates.toggled()) {
-		if (b_gates.read() == Button::PRESSED)
-			{
-        timer=millis();
-        ledsOn();
-        Serial.println("Start:Open");
-			}
-		else 
-			{
-      ledsOn();
-      delay(100);
-      ledsOff();
-			Serial.println("Start:Closed");
-      timer=0;
-			}
+ if (b_gates.toggled()) {
+   if (b_gates.read() == Button::PRESSED)
+     {
+       timer=millis();
+       ledsOn();
+       Serial.println("Start:Open");
+      }
+      else 
+     {
+         ledsOn();
+         delay(100);
+         ledsOff();
+	 Serial.println("Start:Closed");
+         timer=0;
     }
-  if (b_track1.pressed()){
-      track(0,millis());
-      led_track1.off();
-    };
+  }
+  if (b_track1.pressed())
+  {
+    track(0,millis());
+    led_track1.off();
+  };
   if (b_track2.pressed()){
-      track(1,millis());
-      led_track2.off();
-    };
+    track(1,millis());
+    led_track2.off();
+  };
   if (b_track3.pressed()){
-      track(2,millis());
-      led_track3.off();
-    };
+    track(2,millis());
+    led_track3.off();
+  };
 }
